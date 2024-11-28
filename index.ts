@@ -20,12 +20,12 @@ app.get('*', (req, res) => {
     if (queryParams) {
         Object.keys(queryParams).forEach(key => {
             const value = queryParams[key];
-            // Check if value is defined
+            // Ensure value is defined and is a string or an array of strings
             if (value !== undefined) {
                 if (Array.isArray(value)) {
-                    value.forEach(val => redirectUrl.searchParams.append(key, val));
+                    value.forEach(val => redirectUrl.searchParams.append(key, String(val)));
                 } else {
-                    redirectUrl.searchParams.append(key, value.toString());
+                    redirectUrl.searchParams.append(key, String(value));
                 }
             }
         });
